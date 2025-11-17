@@ -12,7 +12,6 @@ const Feed = () => {
     const getFeed=async ()=>{
        try{ if(feed!=null) return;
         const res=await axios.get(BASE_URL+"/feed",{withCredentials:true});
-        console.log(res.data.users)
         dispatch(addFeed(res.data.users));
         } catch(err){
             //handle error
@@ -23,6 +22,8 @@ const Feed = () => {
         getFeed();
     },[])
 
+    if(!feed) return;
+    if(feed.lenght===0) return <h1>No more Users</h1>
   return (
     <div className='flex justify-center my-5'>
         {feed ? <UserCard user={feed[0]}/>:<div>Loading...</div>}
