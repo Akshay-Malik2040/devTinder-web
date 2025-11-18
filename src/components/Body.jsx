@@ -17,17 +17,13 @@ const Body = () => {
       const user=await axios.get(BASE_URL+"/profile",{withCredentials:true});
       dispatch(addUser(user.data.loggedInUser));
     }catch(err){
-      return navigate("/login")
+      navigate("/login");
     }
   }
 
   useEffect(()=>{
-    const token=document.cookie.includes("token");
-    if(!token){
-      return navigate("/login")
-    }
     fetchUser();
-  },[])
+  },[navigate])
 
 
   return (

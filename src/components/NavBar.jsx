@@ -16,8 +16,10 @@ const NavBar = () => {
       dispatch(removeUser());
       return navigate("/login");
     }catch(err){
+      console.log("Error "+err.message);
     }
   }
+
   return (
     <>
       <div className="navbar bg-base-300 shadow-sm">
@@ -42,7 +44,7 @@ const NavBar = () => {
                   <span className="badge">New</span>
                 </Link>
               </li>
-              <li><a>Settings</a></li>
+              <li><Link to={"/connections"}>Connections</Link></li>
               <li><a onClick={handleLogout}>Logout</a></li>
             </ul>
           </div>
