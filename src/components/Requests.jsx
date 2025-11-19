@@ -9,7 +9,6 @@ const Requests = () => {
     const requestsForReview = useSelector((store) => store.requests);
     const fetchRequests = async () => {
         const res = await axios.get(BASE_URL + "/user/request/received", { withCredentials: true });
-        console.log(res.data.connectionRequest);
         dispatch(addRequest(res.data.connectionRequest))
     }
 
@@ -20,7 +19,7 @@ const Requests = () => {
       const reviewRequest = async (status, _id) => {
             try {
                 const res = await axios.post(BASE_URL + "/request/review/" + status + "/" + _id, {}, { withCredentials: true });
-                dispatch(removeRequest(res));
+                dispatch(removeRequest(res.data.data._id));
             } catch (err) {
                 console.log(err.message)
             }

@@ -15,7 +15,6 @@ const EditProfile = ({user}) => {
   const saveProfile=async()=>{
    try {
   const res=await axios.patch(BASE_URL+"/profile/edit",{firstName,lastName,about},{withCredentials:true});
-  console.log(res);
   // dispatch(addUser())}
   } catch(err){
     console.log(err)
