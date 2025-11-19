@@ -21,7 +21,7 @@ const Feed = () => {
     useEffect(()=>{
         getFeed();
     },[])
-
+  
     if(!feed) return;
     if(feed.length===0) return <h1>No more Users</h1>
   return (
