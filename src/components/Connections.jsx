@@ -1,10 +1,42 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
+import { BASE_URL } from '../utils/constant'
+import { useDispatch, useSelector } from 'react-redux'
+import { addConnection } from '../utils/connectionSlice'
 
 const Connections = () => {
-    
-  return (
-    <div>Connections</div>
-  )
+    const dispatch = useDispatch();
+    const connections = useSelector((store) => store.connection);
+    const fetchConnections = async () => {
+        try {
+            const res = await axios.get(BASE_URL + "/user/connections", { withCredentials: true });
+            dispatch(addConnection(res.data.data))
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+
+
+    useEffect(() => {
+        fetchConnections()
+    }, [])
+
+    if (!connections) return <h1 className='text-center py-4 font-bold'>Loading...</h1>
+    if (connections.length === 0) return <h1 className='text-center py-4 font-bold'>No Connection Found</h1>
+    return connections && (
+        <div>
+            <h1 className='text-center py-2 font-bold text-3xl'>Connections</h1>
+            <div className='flex justify-center'>
+                {connections.map((connection) => (
+                    <div key={connection._id} className='flex justify-center w-1/2 bg-base-300 rounded my-4 mx-auto'>
+                        <div className='my-2'><div>{connection.firstName + " " + connection.lastName}</div>
+                            <div>{connection.about}</div></div>
+                        <p></p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
 }
 
 export default Connections
