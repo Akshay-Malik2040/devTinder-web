@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Navigate, useNavigate } from 'react-router';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/constant';
 import { removeUser } from '../utils/userSlice';
 

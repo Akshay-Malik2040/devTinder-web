@@ -10,7 +10,8 @@ const Feed = () => {
     const dispatch=useDispatch();
 
     const getFeed=async ()=>{
-       try{ if(feed!=null) return;
+       try{ 
+        if (feed && feed.length > 0) return;
         const res=await axios.get(BASE_URL+"/feed",{withCredentials:true});
         dispatch(addFeed(res.data.users));
         } catch(err){
@@ -22,7 +23,7 @@ const Feed = () => {
         getFeed();
     },[])
   
-    if(!feed) return;
+    if(!feed) <h1>Loading...</h1>;
     if(feed.length===0) return <h1>No more Users</h1>
   return (
     <div className='flex justify-center my-5'>
